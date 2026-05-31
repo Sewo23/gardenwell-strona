@@ -79,7 +79,9 @@ const jsonLd = {
 		<meta name="twitter:image" content={ogImageUrl} />
 		<link rel="canonical" href={canonical} />
 		<title>{title}</title>
-		<link rel="icon" type="image/png" href="/favicon.png" />
+		<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+		<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 		{
 			optimizedHero && (
 				<link rel="preload" as="image" href={optimizedHero.src} fetchpriority="high" />

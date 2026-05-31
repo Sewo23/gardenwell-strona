@@ -1,0 +1,100 @@
+---
+import '../styles/global.css';
+import Rain from '../components/Rain.astro';
+import { SITE } from '../data/site';
+import { images } from '../data/images';
+import { getImage } from 'astro:assets';
+
+interface Props {
+	title?: string;
+	description?: string;
+	ogDescription?: string;
+	canonicalPath?: string;
+	preloadHero?: boolean;
+	showRain?: boolean;
+}
+
+const {
+	title = SITE.title,
+	description = SITE.description,
+	ogDescription = SITE.ogDescription,
+	canonicalPath = '/',
+	preloadHero = false,
+	showRain = false,
+} = Astro.props;
+
+const canonical = new URL(canonicalPath, SITE.url).href;
+
+const optimizedHero = preloadHero
+	? await getImage({
+			src: images.hero,
+			width: 1200,
+			height: 630,
+			format: 'jpg',
+			quality: 82,
+		})
+	: null;
+
+const ogImageUrl = optimizedHero
+	? new URL(optimizedHero.src, SITE.url).href
+	: new URL('/favicon.png', SITE.url).href;
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'LandscapingBusiness',
+	name: SITE.name,
+	url: SITE.url,
+	email: SITE.email,
+	telephone: SITE.phoneDisplay,
+	areaServed: {
+		'@type': 'Country',
+		name: 'Ireland',
+	},
+	address: {
+		'@type': 'PostalAddress',
+		addressCountry: 'IE',
+	},
+	description: SITE.description,
+	image: ogImageUrl,
+	priceRange: '$$',
+};
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="google-site-verification" content={SITE.googleVerification} />
+		<meta name="description" content={description} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={ogDescription} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:locale" content="en_IE" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={ogDescription} />
+		<meta name="twitter:image" content={ogImageUrl} />
+		<link rel="canonical" href={canonical} />
+		<title>{title}</title>
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		{
+			optimizedHero && (
+				<link rel="preload" as="image" href={optimizedHero.src} fetchpriority="high" />
+			)
+		}
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+	</head>
+	<body class="bg-brand-bg text-brand-text font-sans antialiased">
+		<a
+			href="#main-content"
+			class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-sm focus:bg-white focus:px-4 focus:py-2 focus:text-brand-dark focus:shadow-md focus:outline-none focus:ring-2 focus:ring-brand"
+		>
+			Skip to content
+		</a>
+		{showRain && <Rain />}
+		<slot />
+	</body>
+</html>

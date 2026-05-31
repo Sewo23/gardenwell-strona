@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets';
+import { images } from '../data/images';
+import Button from './Button.astro';
+---
+
+<section class="relative h-screen flex items-center justify-center text-center px-4">
+	<div class="absolute inset-0 z-0">
+		<Image
+			src={images.hero}
+			alt="Premium garden design in Ireland"
+			widths={[640, 1024, 1536, 1920]}
+			sizes="100vw"
+			class="w-full h-full object-cover"
+			loading="eager"
+			fetchpriority="high"
+		/>
+		<div class="absolute inset-0 bg-brand-dark/70"></div>
+	</div>
+
+	<div class="relative z-10 max-w-4xl mx-auto text-white mt-16">
+		<h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight font-serif animate-fade-in-up">
+			Beautiful gardens.<br /><span class="italic text-brand-light">Better wellbeing.</span>
+		</h1>
+		<p class="text-lg md:text-xl font-light mb-10 max-w-2xl mx-auto text-gray-100 animate-fade-in-up-delay-1">
+			We design and build premium outdoor spaces in Ireland. High-end landscape architecture,
+			paving, and full garden construction inspired by nature.
+		</p>
+		<Button href="#portfolio" variant="primary" class="animate-fade-in-up-delay-2">
+			View Our Work
+		</Button>
+	</div>
+</section>

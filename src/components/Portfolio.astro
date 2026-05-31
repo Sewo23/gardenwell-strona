@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets';
+import { images } from '../data/images';
+
+const projects = [
+	{
+		src: images.patio,
+		alt: 'Modern patio paving project in Ireland',
+		title: 'Modern Patio Paving',
+	},
+	{
+		src: images.garden,
+		alt: 'Full garden renovation and landscape architecture',
+		title: 'Full Garden Renovation',
+	},
+];
+---
+
+<section id="portfolio" class="py-24 bg-brand-muted px-6">
+	<div class="max-w-7xl mx-auto">
+		<div class="text-center mb-16">
+			<h2 class="text-4xl font-bold text-brand-dark mb-4 font-serif">Completed Projects</h2>
+			<p class="text-gray-600">Examples of our high-end hardscaping and garden renovations.</p>
+		</div>
+
+		<div class="grid md:grid-cols-2 gap-8">
+			{
+				projects.map((project) => (
+					<div class="group overflow-hidden rounded-sm relative shadow-sm">
+						<Image
+							src={project.src}
+							alt={project.alt}
+							widths={[400, 600, 800]}
+							sizes="(max-width: 768px) 100vw, 50vw"
+							class="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-700"
+							loading="lazy"
+						/>
+						<div class="absolute bottom-0 left-0 bg-white/95 p-4 m-4 rounded-sm">
+							<p class="font-bold text-brand-dark font-serif">{project.title}</p>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

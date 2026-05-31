@@ -1,0 +1,91 @@
+---
+import { SITE } from '../data/site';
+import Button from './Button.astro';
+---
+
+<section id="contact" class="py-24 px-6 max-w-7xl mx-auto flex flex-col md:flex-row gap-16">
+	<div class="md:w-1/2">
+		<h2 class="text-4xl font-bold text-brand-dark mb-6 font-serif">Let's build your dream garden.</h2>
+		<p class="text-gray-600 mb-10">
+			Ready to transform your outdoor space? Get in touch with us for a consultation and project
+			estimation.
+		</p>
+
+		<div class="space-y-6">
+			<div>
+				<p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Phone / WhatsApp</p>
+				<a href={`tel:${SITE.phone}`} class="text-xl text-brand-dark font-serif hover:underline">
+					{SITE.phoneDisplay}
+				</a>
+			</div>
+			<div>
+				<p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Email</p>
+				<a href={`mailto:${SITE.email}`} class="text-lg text-brand-dark hover:underline">
+					{SITE.email}
+				</a>
+			</div>
+			<div>
+				<p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Operating In</p>
+				<p class="text-lg text-brand-dark">Ireland</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="md:w-1/2 bg-white p-8 border border-brand-border shadow-sm">
+		<form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/success/" class="space-y-4">
+			<input type="hidden" name="form-name" value="contact" />
+			<p class="hidden" aria-hidden="true">
+				<label>
+					Don't fill this out:
+					<input name="bot-field" tabindex="-1" autocomplete="off" />
+				</label>
+			</p>
+			<div>
+				<label for="contact-name" class="block text-sm font-semibold text-brand-dark mb-2">
+					Name
+				</label>
+				<input
+					type="text"
+					id="contact-name"
+					name="name"
+					class="w-full border border-gray-300 p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition"
+					required
+				/>
+			</div>
+			<div>
+				<label for="contact-email" class="block text-sm font-semibold text-brand-dark mb-2">
+					Email
+				</label>
+				<input
+					type="email"
+					id="contact-email"
+					name="email"
+					class="w-full border border-gray-300 p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition"
+					required
+				/>
+			</div>
+			<div>
+				<label for="contact-message" class="block text-sm font-semibold text-brand-dark mb-2">
+					Message
+				</label>
+				<textarea
+					id="contact-message"
+					name="message"
+					rows="4"
+					class="w-full border border-gray-300 p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition"
+					required
+				></textarea>
+			</div>
+			<Button type="submit" variant="outline" class="w-full p-3 font-bold">
+				Send Message
+			</Button>
+		</form>
+	</div>
+</section>
+
+<!-- Hidden form for Netlify build-time detection -->
+<form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+	<input type="text" name="name" />
+	<input type="email" name="email" />
+	<textarea name="message"></textarea>
+</form>

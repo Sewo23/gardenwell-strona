@@ -1,0 +1,43 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter/wght.css";
+@import "@fontsource-variable/playfair-display/wght.css";
+
+@theme {
+	--color-brand-dark: #1e3f20;
+	--color-brand: #2d5a27;
+	--color-brand-light: #d0ded0;
+	--color-brand-muted: #eef3ed;
+	--color-brand-border: #e5ebe4;
+	--color-brand-text: #2c3e2b;
+	--color-brand-bg: #fcfdfc;
+	--color-brand-accent: #556b2f;
+
+	--font-serif: "Playfair Display Variable", "Playfair Display", serif;
+	--font-sans: "Inter Variable", "Inter", sans-serif;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.animate-fade-in-up {
+	animation: fadeInUp 0.8s ease-out forwards;
+	opacity: 0;
+}
+
+.animate-fade-in-up-delay-1 {
+	animation: fadeInUp 0.8s ease-out 0.2s forwards;
+	opacity: 0;
+}
+
+.animate-fade-in-up-delay-2 {
+	animation: fadeInUp 0.8s ease-out 0.4s forwards;
+	opacity: 0;
+}

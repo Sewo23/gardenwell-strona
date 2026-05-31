@@ -1,0 +1,99 @@
+---
+import Button from './Button.astro';
+
+const links = [
+	{ href: '#services', label: 'Services' },
+	{ href: '#portfolio', label: 'Portfolio' },
+	{ href: '#contact', label: 'Contact' },
+];
+---
+
+<header class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b border-brand-border shadow-sm">
+	<div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+		<a href="/" class="text-3xl font-bold text-brand-dark tracking-tight font-serif">gardenwell</a>
+
+		<div class="hidden md:flex items-center gap-6">
+			{
+				links.slice(0, -1).map((link) => (
+					<a
+						href={link.href}
+						class="text-sm font-semibold text-brand-dark/80 uppercase tracking-wide hover:text-brand transition-colors"
+					>
+						{link.label}
+					</a>
+				))
+			}
+			<Button href="#contact">Contact</Button>
+		</div>
+
+		<button
+			type="button"
+			class="md:hidden inline-flex items-center justify-center border border-brand text-brand p-3 rounded-sm"
+			aria-expanded="false"
+			aria-controls="mobile-menu"
+			data-nav-toggle
+		>
+			<span class="sr-only">Open menu</span>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="20"
+				height="20"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				aria-hidden="true"
+			>
+				<line x1="4" y1="7" x2="20" y2="7"></line>
+				<line x1="4" y1="12" x2="20" y2="12"></line>
+				<line x1="4" y1="17" x2="20" y2="17"></line>
+			</svg>
+		</button>
+	</div>
+
+	<div
+		id="mobile-menu"
+		class="md:hidden hidden border-t border-brand-border bg-white/98"
+		data-nav-menu
+	>
+		<nav class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-3" aria-label="Mobile">
+			{
+				links.map((link) => (
+					<a
+						href={link.href}
+						class="text-sm font-semibold text-brand-dark uppercase tracking-wide py-2 hover:text-brand transition-colors"
+						data-nav-link
+					>
+						{link.label}
+					</a>
+				))
+			}
+		</nav>
+	</div>
+</header>
+
+<script>
+	const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+	const menu = document.querySelector<HTMLElement>('[data-nav-menu]');
+	const links = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
+
+	if (toggle && menu) {
+		const closeMenu = () => {
+			menu.classList.add('hidden');
+			toggle.setAttribute('aria-expanded', 'false');
+		};
+
+		toggle.addEventListener('click', () => {
+			const isOpen = !menu.classList.contains('hidden');
+			menu.classList.toggle('hidden', isOpen);
+			toggle.setAttribute('aria-expanded', String(!isOpen));
+		});
+
+		links.forEach((link) => link.addEventListener('click', closeMenu));
+
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape') closeMenu();
+		});
+	}
+</script>

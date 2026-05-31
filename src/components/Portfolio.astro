@@ -5,28 +5,35 @@ import { images } from '../data/images';
 const projects = [
 	{
 		src: images.patio,
-		alt: 'Modern patio paving project in Ireland',
-		title: 'Modern Patio Paving',
+		alt: 'Structured floral landscape with sweeping lavender beds and stone borders in Ireland',
+		title: 'Structured Floral Landscapes',
+		caption:
+			'Sweeping lavender beds, elegant stone borders, and manicured lawns designed to bring a touch of timeless elegance to your property.',
 	},
 	{
 		src: images.garden,
-		alt: 'Full garden renovation and landscape architecture',
-		title: 'Full Garden Renovation',
+		alt: 'Classic Irish cottage garden with vibrant perennial borders and stone pathway',
+		title: 'Classic Irish Cottage Garden',
+		caption:
+			'Vibrant, densely planted borders bursting with traditional blooms, perfectly framing classic architecture and thriving in our local climate.',
 	},
 ];
 ---
 
-<section id="portfolio" class="py-24 bg-brand-muted px-6">
+<section id="portfolio" class="py-24 px-6">
 	<div class="max-w-7xl mx-auto">
-		<div class="text-center mb-16">
-			<h2 class="text-4xl font-bold text-brand-dark mb-4 font-serif">Completed Projects</h2>
-			<p class="text-gray-600">Examples of our high-end hardscaping and garden renovations.</p>
+		<div class="text-center mb-16 max-w-2xl mx-auto">
+			<h2 class="text-4xl font-bold text-brand-dark mb-4 font-serif">Design Portfolio</h2>
+			<p class="text-gray-600 leading-relaxed">
+				Design concepts that aim for beauty you can live with — not show gardens that only work on
+				paper.
+			</p>
 		</div>
 
 		<div class="grid md:grid-cols-2 gap-8">
 			{
 				projects.map((project) => (
-					<div class="group overflow-hidden rounded-sm relative shadow-sm">
+					<div class="group overflow-hidden rounded-sm relative shadow-sm bg-white">
 						<Image
 							src={project.src}
 							alt={project.alt}
@@ -35,8 +42,9 @@ const projects = [
 							class="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-700"
 							loading="lazy"
 						/>
-						<div class="absolute bottom-0 left-0 bg-white/95 p-4 m-4 rounded-sm">
-							<p class="font-bold text-brand-dark font-serif">{project.title}</p>
+						<div class="p-5 border-t border-brand-border">
+							<p class="font-bold text-brand-dark font-serif mb-2">{project.title}</p>
+							<p class="text-sm text-gray-600 leading-relaxed">{project.caption}</p>
 						</div>
 					</div>
 				))

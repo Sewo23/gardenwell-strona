@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import Rain from '../components/Rain.astro';
-import { SITE } from '../data/site';
+import { SITE, services } from '../data/site';
 import { images } from '../data/images';
 import { getImage } from 'astro:assets';
 
@@ -39,29 +39,58 @@ const ogImageUrl = optimizedHero
 	? new URL(optimizedHero.src, SITE.url).href
 	: new URL('/favicon.png', SITE.url).href;
 
+const areaLabels: Record<(typeof SITE.areasServed)[number], string> = {
+	Dublin: 'County Dublin',
+	Kildare: 'County Kildare',
+	Meath: 'County Meath',
+};
+
 const jsonLd = {
 	'@context': 'https://schema.org',
-	'@type': 'LandscapingBusiness',
+	'@type': 'ProfessionalService',
+	additionalType: 'https://schema.org/LandscapeArchitect',
 	name: SITE.name,
 	url: SITE.url,
 	email: SITE.email,
 	telephone: SITE.phoneDisplay,
-	areaServed: {
-		'@type': 'Country',
-		name: 'Ireland',
-	},
+	serviceType: 'Garden Design',
+	description: SITE.description,
+	image: ogImageUrl,
+	areaServed: SITE.areasServed.map((area) => ({
+		'@type': 'AdministrativeArea',
+		name: areaLabels[area],
+	})),
 	address: {
 		'@type': 'PostalAddress',
 		addressCountry: 'IE',
 	},
-	description: SITE.description,
-	image: ogImageUrl,
-	priceRange: '$$',
+	contactPoint: {
+		'@type': 'ContactPoint',
+		telephone: SITE.phoneDisplay,
+		email: SITE.email,
+		contactType: 'customer service',
+		areaServed: ['County Dublin', 'County Kildare', 'County Meath'],
+		availableLanguage: ['English'],
+	},
+	hasOfferCatalog: {
+		'@type': 'OfferCatalog',
+		name: 'Garden Design Services',
+		itemListElement: services.map((service, index) => ({
+			'@type': 'Offer',
+			position: index + 1,
+			itemOffered: {
+				'@type': 'Service',
+				name: service.title,
+				description: service.description,
+				areaServed: ['County Dublin', 'County Kildare', 'County Meath'],
+			},
+		})),
+	},
 };
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en-IE" class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />

@@ -35,12 +35,19 @@ import Button from './Button.astro';
 	</div>
 
 	<div class="md:w-1/2 bg-white p-8 border border-brand-border shadow-sm">
-		<form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/success/" class="space-y-4">
+		<form
+			name="contact"
+			method="POST"
+			data-netlify="true"
+			data-netlify-honeypot="bot-field"
+			netlify-honeypot="bot-field"
+			action="/success/"
+			class="space-y-4"
+		>
 			<input type="hidden" name="form-name" value="contact" />
-			<p class="hidden" aria-hidden="true">
+			<p class="hidden" style="display: none;">
 				<label>
-					Don't fill this out:
-					<input name="bot-field" tabindex="-1" autocomplete="off" />
+					Don't fill this out if you're human: <input name="bot-field" />
 				</label>
 			</p>
 			<div>
@@ -80,6 +87,25 @@ import Button from './Button.astro';
 					required
 				></textarea>
 			</div>
+			<div>
+				<label for="contact-gdpr-consent" class="flex items-start gap-3 text-sm text-gray-600 leading-relaxed cursor-pointer">
+					<input
+						type="checkbox"
+						id="contact-gdpr-consent"
+						name="gdpr-consent"
+						value="yes"
+						class="mt-1 shrink-0 rounded-sm border-gray-300 text-brand focus:ring-brand"
+						required
+					/>
+					<span>
+						I consent to having Gardenwell collect my personal details to respond to my inquiry.
+						For more information, please read our{' '}
+						<a href="/privacy-policy/" class="text-brand underline hover:text-brand-dark">
+							Privacy Policy
+						</a>.
+					</span>
+				</label>
+			</div>
 			<Button type="submit" variant="outline" class="w-full p-3 font-bold">
 				Request a Design Consultation
 			</Button>
@@ -88,8 +114,10 @@ import Button from './Button.astro';
 </section>
 
 <!-- Hidden form for Netlify build-time detection -->
-<form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+<form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" netlify-honeypot="bot-field" hidden>
 	<input type="text" name="name" />
 	<input type="email" name="email" />
 	<textarea name="message"></textarea>
+	<input type="checkbox" name="gdpr-consent" value="yes" />
+	<input type="text" name="bot-field" />
 </form>

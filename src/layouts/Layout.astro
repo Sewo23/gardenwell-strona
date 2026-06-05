@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import Rain from '../components/Rain.astro';
+import Atmosphere from '../components/Atmosphere.astro';
 import { SITE, services } from '../data/site';
 import { images } from '../data/images';
 import { getImage } from 'astro:assets';
@@ -125,7 +125,7 @@ const jsonLd = {
 		>
 			Skip to content
 		</a>
-		{showRain && <Rain />}
+		{showRain && <Atmosphere />}
 		<slot />
 	</body>
 </html>

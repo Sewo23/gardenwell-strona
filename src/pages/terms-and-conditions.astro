@@ -1,0 +1,241 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../data/site';
+
+const title = 'Terms and Conditions | Gardenwell';
+const description =
+	'Terms and Conditions for Gardenwell — website use, intellectual property, liability, and governing law for our garden design services in Ireland.';
+const lastUpdated = '31 May 2026';
+---
+
+<Layout
+	title={title}
+	description={description}
+	ogDescription={description}
+	canonicalPath="/terms-and-conditions/"
+>
+	<main id="main-content" class="min-h-screen">
+		<header class="border-b border-brand-border bg-white/95 backdrop-blur-md">
+			<div class="max-w-3xl mx-auto px-6 py-6">
+				<a
+					href="/"
+					class="text-2xl font-bold text-brand-dark tracking-tight font-serif hover:text-brand transition-colors"
+				>
+					gardenwell
+				</a>
+			</div>
+		</header>
+
+		<article class="max-w-3xl mx-auto px-6 py-16 md:py-24">
+			<p class="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
+				Legal
+			</p>
+			<h1 class="text-4xl md:text-5xl font-bold text-brand-dark mb-4 font-serif">
+				Terms and Conditions
+			</h1>
+			<p class="text-sm text-gray-500 mb-12">Last updated: {lastUpdated}</p>
+
+			<div class="space-y-10 text-gray-600 leading-relaxed">
+				<section>
+					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">1. Introduction</h2>
+					<p>
+						These Terms and Conditions ("Terms") govern your use of the website operated by
+						Gardenwell ("we", "us", or "our") at{' '}
+						<a href={SITE.url} class="text-brand underline hover:text-brand-dark">
+							{SITE.url.replace('https://', '')}
+						</a>{' '}
+						and your initial interactions with us regarding our premium garden design and outdoor
+						wellness design services in Ireland.
+					</p>
+					<p class="mt-4">
+						By accessing this website or submitting an inquiry through our contact form, you agree
+						to be bound by these Terms. If you do not agree, please do not use this website.
+					</p>
+				</section>
+
+				<section>
+					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">2. About Gardenwell</h2>
+					<p>
+						Gardenwell provides high-end garden design, layout planning, and planting concepts for
+						residential outdoor spaces, with a focus on beautiful, buildable designs suited to
+						Irish conditions. We serve clients primarily in Dublin, Kildare, and Meath.
+					</p>
+					<p class="mt-4">
+						Information on this website is intended to describe our design approach and services at
+						a general level. It does not constitute a binding offer unless expressly confirmed in
+						writing.
+					</p>
+				</section>
+
+				<section>
+					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">3. Website Use</h2>
+					<p>You agree to use this website only for lawful purposes and in a manner that:</p>
+					<ul class="mt-4 list-disc pl-6 space-y-2">
+						<li>does not infringe the rights of Gardenwell or any third party;</li>
+						<li>does not attempt to gain unauthorised access to our systems or data;</li>
+						<li>does not introduce malware, spam, or harmful code; and</li>
+						<li>does not scrape, copy, or reproduce substantial portions of the site without permission.</li>
+					</ul>
+					<p class="mt-4">
+						We reserve the right to restrict access to the website where we reasonably believe these
+						Terms have been breached.
+					</p>
+				</section>
+
+				<section>
+					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">
+						4. Intellectual Property
+					</h2>
+					<p>
+						All content on this website — including but not limited to text, branding, logos,
+						graphics, photographs, portfolio images, layout drawings, planting plans, mood boards,
+						<strong class="text-brand-dark">3D renders</strong>,{' '}
+						<strong class="text-brand-dark">design concepts</strong>, and any other creative or
+						technical material displayed or referenced — is the intellectual property of Gardenwell
+						or its licensors and is protected by copyright and other applicable intellectual property
+						laws.
+					</p>
+					<p class="mt-4">Unless we provide written permission, you must not:</p>
+					<ul class="mt-4 list-disc pl-6 space-y-2">
+						<li>copy, reproduce, download, or redistribute our design work, renders, or photography;</li>
+						<li>use our images or concepts for commercial purposes, portfolios, or marketing;</li>
+						<li>modify, reverse-engineer, or create derivative works from our designs; or</li>
+						<li>present our work as your own or pass it to third parties without authorisation.</li>
+					</ul>
+					<p class="mt-4">
+						Where Gardenwell prepares bespoke design material for a client under a separate written
+						agreement, ownership and usage rights will be defined in that individual client contract.
+						Until such rights are expressly assigned or licensed in writing, all design outputs remain
+						the property of Gardenwell.
+					</p>
+				</section>
+
+				<section>
+					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">
+						5. Inquiries and Client Engagements
+					</h2>
+					<p>
+						Submitting our contact form or communicating with us does not create a client
+						relationship or contractual obligation on either party. Any design engagement, fee,
+						deliverables, timelines, revisions, and scope of work will be set out in a separate
+						written proposal or client contract agreed between you and Gardenwell.
+					</p>
+					<p class="mt-4">
+						In the event of any conflict between information on this website and a signed client
+						contract, the signed client contract shall prevail.
+					</p>
+				</section>
+
+				<section>
+					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">
+						6. Limitation of Liability
+					</h2>
+					<p>
+						The content on this website is provided for <strong class="text-brand-dark">general informational purposes</strong> only. While we aim to present accurate and thoughtful information about our design services, we make no warranty that all content is complete, current, or suitable for every individual project.
+					</p>
+					<p class="mt-4">To the fullest extent permitted by applicable law:</p>
+					<ul class="mt-4 list-disc pl-6 space-y-2">
+						<li>
+							Gardenwell shall not be liable for any loss or damage arising from your reliance on
+							website content alone when making decisions about a garden or outdoor project.
+						</li>
+						<li>
+							We are not responsible for third-party websites linked from this site, nor for
+							technical interruptions or errors beyond our reasonable control.
+						</li>
+						<li>
+							Any liability relating to design services, deliverables, or project outcomes is
+							governed by the relevant individual client contract, not by these website Terms.
+						</li>
+					</ul>
+					<p class="mt-4">
+						Nothing in these Terms excludes or limits liability that cannot be excluded or limited
+						under the laws of the Republic of Ireland, including liability for fraud or for death or
+						personal injury caused by negligence where such limitation is not permitted.
+					</p>
+				</section>
+
+				<section>
+					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">7. Disclaimer</h2>
+					<p>
+						Garden design outcomes depend on site conditions, budget, permissions, contractor
+						execution, planting establishment, weather, and ongoing maintenance. Visual representations
+						(including photographs and 3D renders) are illustrative and may differ from final built
+						results. We design with buildability and Irish conditions in mind, but actual outcomes
+						require professional on-site assessment and appropriate construction or horticultural
+						works.
+					</p>
+				</section>
+
+				<section>
+					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">8. Privacy</h2>
+					<p>
+						Your use of this website and any personal data you provide is also governed by our{' '}
+						<a href="/privacy-policy/" class="text-brand underline hover:text-brand-dark">
+							Privacy Policy
+						</a>, which explains how we collect and process personal information in accordance with
+						GDPR and Irish data protection law.
+					</p>
+				</section>
+
+				<section>
+					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">
+						9. Governing Law and Jurisdiction
+					</h2>
+					<p>
+						These Terms are governed by and construed in accordance with the laws of the{' '}
+						<strong class="text-brand-dark">Republic of Ireland</strong>, without regard to conflict
+						of law principles.
+					</p>
+					<p class="mt-4">
+						Any dispute arising out of or in connection with these Terms or your use of this website
+						shall be subject to the exclusive jurisdiction of the courts of the Republic of Ireland,
+						unless mandatory consumer protection rules provide otherwise.
+					</p>
+				</section>
+
+				<section>
+					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">
+						10. Changes to These Terms
+					</h2>
+					<p>
+						We may update these Terms from time to time. The "Last updated" date at the top of this
+						page indicates when they were most recently revised. Continued use of the website after
+						changes are posted constitutes acceptance of the updated Terms.
+					</p>
+				</section>
+
+				<section>
+					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">11. Contact</h2>
+					<p>
+						For questions about these Terms and Conditions, please contact:
+					</p>
+					<ul class="mt-4 list-none pl-0 space-y-2">
+						<li><strong class="text-brand-dark">Gardenwell</strong></li>
+						<li>
+							Email:{' '}
+							<a href={`mailto:${SITE.email}`} class="text-brand underline hover:text-brand-dark">
+								{SITE.email}
+							</a>
+						</li>
+						<li>
+							Website:{' '}
+							<a href={SITE.url} class="text-brand underline hover:text-brand-dark">
+								{SITE.url.replace('https://', '')}
+							</a>
+						</li>
+					</ul>
+				</section>
+			</div>
+
+			<p class="mt-16 pt-8 border-t border-brand-border">
+				<a href="/" class="text-brand font-semibold hover:text-brand-dark transition-colors">
+					&larr; Back to homepage
+				</a>
+			</p>
+		</article>
+
+		<Footer />
+	</main>
+</Layout>

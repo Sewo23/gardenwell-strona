@@ -6,7 +6,7 @@ import { SITE } from '../data/site';
 const title = 'Privacy Policy | Gardenwell';
 const description =
 	'Privacy Policy for Gardenwell — how we collect, use, and protect your personal data in accordance with GDPR and Irish data protection law.';
-const lastUpdated = '31 May 2026';
+const lastUpdated = '12 June 2026';
 ---
 
 <Layout
@@ -92,10 +92,13 @@ const lastUpdated = '31 May 2026';
 						<li><strong class="text-brand-dark">Name</strong> — provided when you submit our contact form or communicate with us directly.</li>
 						<li><strong class="text-brand-dark">Email address</strong> — provided when you submit our contact form or send us an email.</li>
 						<li>
-							<strong class="text-brand-dark">Phone number</strong> — if you choose to share it with us by phone, WhatsApp, email, or within your message.
+							<strong class="text-brand-dark">Phone number</strong> — if you call our Irish business line, share your number in a message, or contact us via WhatsApp (where your WhatsApp account is linked to a phone number).
 						</li>
 						<li>
-							<strong class="text-brand-dark">Message content</strong> — details about your garden project, location, budget, preferences, and any other information you voluntarily provide.
+							<strong class="text-brand-dark">WhatsApp profile information</strong> — such as your display name and any profile details made visible to us when you message Gardenwell through WhatsApp.
+						</li>
+						<li>
+							<strong class="text-brand-dark">Message content</strong> — details about your garden project, location, budget, preferences, photos or files you choose to send, and any other information you voluntarily provide.
 						</li>
 						<li>
 							<strong class="text-brand-dark">Technical data</strong> — limited information such as IP address, browser type, and device information may be processed by our website hosting provider for security and operational purposes.
@@ -116,14 +119,53 @@ const lastUpdated = '31 May 2026';
 					<ul class="mt-4 list-disc pl-6 space-y-2">
 						<li>Submit the contact form on our website;</li>
 						<li>Email us directly at {SITE.email};</li>
-						<li>Call or message us via phone or WhatsApp; or</li>
+						<li>Call our Irish business phone line at {SITE.phoneDisplay};</li>
+						<li>Choose to message us via the optional WhatsApp link on our website; or</li>
 						<li>Otherwise communicate with us about our garden design services.</li>
 					</ul>
 				</section>
 
 				<section>
 					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">
-						5. Purpose of Collection and Legal Basis
+						5. WhatsApp Messaging (Optional)
+					</h2>
+					<p>
+						Our website offers an <strong class="text-brand-dark">optional</strong> “Message on
+						WhatsApp” button for visitors who already use WhatsApp. You are never required to install
+						WhatsApp or use this channel — you can contact us by email, phone, or our contact form
+						instead.
+					</p>
+					<p class="mt-4">
+						If you click the WhatsApp button, you will be directed to WhatsApp (on your phone or via
+						WhatsApp Web, depending on your device). Any message you send is received and handled by
+						<strong class="text-brand-dark">Gardenwell</strong> for the purpose of responding to your
+						garden design inquiry. We do not use WhatsApp for marketing broadcasts unless you have
+						clearly agreed to receive them.
+					</p>
+					<p class="mt-4">
+						When you use WhatsApp, your messages and related account information are also processed by
+						<strong class="text-brand-dark">WhatsApp LLC / Meta Platforms</strong> as a separate
+						service provider under WhatsApp’s own terms and privacy policy. We do not control how
+						Meta processes data within the WhatsApp platform. For more information, see{' '}
+						<a
+							href="https://www.whatsapp.com/legal/privacy-policy"
+							class="text-brand underline hover:text-brand-dark"
+							rel="noopener noreferrer"
+							target="_blank">WhatsApp’s Privacy Policy</a
+						>.
+					</p>
+					<p class="mt-4">
+						Please do not send sensitive personal information via WhatsApp unless necessary for your
+						inquiry. For formal data protection requests, email us at{' '}
+						<a href={`mailto:${SITE.email}`} class="text-brand underline hover:text-brand-dark">
+							{SITE.email}
+						</a>.
+					</p>
+				</section>
+
+				<section>
+					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">
+						6. Purpose of Collection and Legal Basis
 					</h2>
 					<p>We use your personal data for the following purposes:</p>
 					<ul class="mt-4 list-disc pl-6 space-y-2">
@@ -131,7 +173,7 @@ const lastUpdated = '31 May 2026';
 							<strong class="text-brand-dark">Responding to inquiries and quote requests</strong> — to review your message, understand your project, and reply with relevant information about our garden design services.
 						</li>
 						<li>
-							<strong class="text-brand-dark">Client communication</strong> — to follow up on your inquiry, arrange consultations, and provide service-related correspondence where appropriate.
+							<strong class="text-brand-dark">Client communication</strong> — to follow up on your inquiry by email, phone, or WhatsApp (if you choose that channel), arrange consultations, and provide service-related correspondence where appropriate.
 						</li>
 						<li>
 							<strong class="text-brand-dark">Website operation and security</strong> — to maintain the functionality and security of our website through our hosting providers.
@@ -143,7 +185,7 @@ const lastUpdated = '31 May 2026';
 							<strong class="text-brand-dark">Consent (Article 6(1)(a))</strong> — when you tick the consent checkbox on our contact form before submitting your inquiry.
 						</li>
 						<li>
-							<strong class="text-brand-dark">Legitimate interests (Article 6(1)(f))</strong> — to respond to direct communications and operate our business securely, where this does not override your rights.
+							<strong class="text-brand-dark">Legitimate interests (Article 6(1)(f))</strong> — to respond to direct communications (including optional WhatsApp messages you initiate) and operate our business securely, where this does not override your rights.
 						</li>
 						<li>
 							<strong class="text-brand-dark">Pre-contractual steps (Article 6(1)(b))</strong> — where processing is necessary to respond to your request before entering into a design engagement.
@@ -153,7 +195,7 @@ const lastUpdated = '31 May 2026';
 
 				<section>
 					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">
-						6. Data Sharing and Processors
+						7. Data Sharing and Processors
 					</h2>
 					<p>
 						We do not sell your personal data. We may share your information only where necessary
@@ -163,6 +205,9 @@ const lastUpdated = '31 May 2026';
 					<ul class="mt-4 list-disc pl-6 space-y-2">
 						<li>
 							<strong class="text-brand-dark">Netlify, Inc.</strong> — our website hosting and form submission provider. Contact form data is transmitted to and stored by Netlify in accordance with their privacy and security practices.
+						</li>
+						<li>
+							<strong class="text-brand-dark">WhatsApp LLC / Meta Platforms Ireland Limited</strong> — if you choose to message us via WhatsApp, message delivery and platform functionality are provided by WhatsApp. Meta may process data globally in accordance with its privacy policy and applicable transfer safeguards.
 						</li>
 					</ul>
 					<p class="mt-4">
@@ -174,7 +219,7 @@ const lastUpdated = '31 May 2026';
 				</section>
 
 				<section>
-					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">7. Data Retention</h2>
+					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">8. Data Retention</h2>
 					<p>
 						We retain personal data only for as long as necessary for the purposes for which it was
 						collected, including:
@@ -182,6 +227,9 @@ const lastUpdated = '31 May 2026';
 					<ul class="mt-4 list-disc pl-6 space-y-2">
 						<li>
 							<strong class="text-brand-dark">Contact form inquiries:</strong> up to 24 months after our last meaningful communication with you, unless a longer period is required to manage an ongoing project or legal obligation.
+						</li>
+						<li>
+							<strong class="text-brand-dark">WhatsApp conversations:</strong> retained for up to 24 months after our last meaningful communication with you, unless a longer period is needed for an ongoing project or legal obligation. You may also delete messages on your side at any time within WhatsApp.
 						</li>
 						<li>
 							<strong class="text-brand-dark">Client project records:</strong> retained for the duration of the engagement and for a reasonable period thereafter for business, tax, or legal purposes where applicable.
@@ -193,7 +241,7 @@ const lastUpdated = '31 May 2026';
 				</section>
 
 				<section>
-					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">8. Data Security</h2>
+					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">9. Data Security</h2>
 					<p>
 						We take appropriate technical and organisational measures to protect your personal data
 						against unauthorised access, alteration, disclosure, or destruction. These measures
@@ -208,7 +256,7 @@ const lastUpdated = '31 May 2026';
 				</section>
 
 				<section>
-					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">9. Cookies</h2>
+					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">10. Cookies</h2>
 					<p>
 						Our website is primarily a static informational site and does not use advertising or
 						analytics cookies. Essential cookies or similar technologies may be used by our hosting
@@ -219,7 +267,7 @@ const lastUpdated = '31 May 2026';
 
 				<section>
 					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">
-						10. Your Rights Under GDPR
+						11. Your Rights Under GDPR
 					</h2>
 					<p>
 						Under GDPR, if you are located in the European Economic Area (including Ireland), you
@@ -259,7 +307,7 @@ const lastUpdated = '31 May 2026';
 				</section>
 
 				<section>
-					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">11. Children</h2>
+					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">12. Children</h2>
 					<p>
 						Our services are intended for adults enquiring about garden design. We do not knowingly
 						collect personal data from children under 16. If you believe we have collected such
@@ -269,7 +317,7 @@ const lastUpdated = '31 May 2026';
 
 				<section>
 					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">
-						12. Changes to This Policy
+						13. Changes to This Policy
 					</h2>
 					<p>
 						We may update this Privacy Policy from time to time to reflect changes in our practices
@@ -280,7 +328,7 @@ const lastUpdated = '31 May 2026';
 				</section>
 
 				<section>
-					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">13. Contact Us</h2>
+					<h2 class="text-2xl font-bold text-brand-dark mb-4 font-serif">14. Contact Us</h2>
 					<p>
 						If you have any questions about this Privacy Policy or wish to exercise your data
 						protection rights, please contact:

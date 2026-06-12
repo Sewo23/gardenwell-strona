@@ -2,7 +2,7 @@ export const faqItems = [
 	{
 		question: 'What garden design services does Gardenwell offer in Ireland?',
 		answer:
-			'Gardenwell provides premium garden design in Ireland — including concept development, buildable layout planning, and planting schemes suited to Irish gardens. We focus on design that is aspirational in quality and honest in execution.',
+			'Gardenwell provides bespoke garden design in Ireland on commission — including concept development, buildable layout planning, and planting schemes suited to Irish gardens. We focus on design that is thoughtful in quality and honest in execution.',
 	},
 	{
 		question: 'Do you build gardens or only design them?',
@@ -12,12 +12,12 @@ export const faqItems = [
 	{
 		question: 'How is Gardenwell different from other garden designers?',
 		answer:
-			'Many designers produce visually striking concepts that are difficult to build, costly to deliver, or hard to maintain. Gardenwell takes a premium but practical approach — creating beautiful gardens that respect your budget, your site, and the level of upkeep you want to live with.',
+			'Many designers produce visually striking concepts that are difficult to build, costly to deliver, or hard to maintain. Gardenwell takes a practical, client-focused approach — creating beautiful gardens that respect your budget, your site, and the level of upkeep you want to live with.',
 	},
 	{
 		question: 'Will my garden design be realistic to build and maintain?',
 		answer:
-			'Yes — that is central to our process. We design with buildability, Irish climate, and long-term maintenance in mind from the start. The goal is a garden that feels premium in everyday use, not one that only works as an idealised concept.',
+			'Yes — that is central to our process. We design with buildability, Irish climate, and long-term maintenance in mind from the start. The goal is a garden that works in everyday use, not one that only looks good as an idealised concept.',
 	},
 	{
 		question: 'Which areas do you design gardens for?',

@@ -1,7 +1,7 @@
 {
   "name": "strona",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "engines": {
     "node": ">=22.12.0"
   },
@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "generate:images": "node scripts/generate-placeholders.mjs"
+    "generate:images": "node scripts/generate-placeholders.mjs",
+    "generate:favicon": "node scripts/generate-favicon.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

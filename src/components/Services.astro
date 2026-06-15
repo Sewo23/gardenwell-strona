@@ -1,26 +1,42 @@
 ---
 import { services } from '../data/site';
+
+const icons = [
+	// Bespoke design — pencil sketch / tailored plan
+	`<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>`,
+	// Layout planning — grid
+	`<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>`,
+	// Planting — sprout
+	`<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22V12"/><path d="M12 12C12 7 7 4 4 4c0 4 3 8 8 8"/><path d="M12 12c0-5 5-8 8-8 0 4-3 8-8 8"/></svg>`,
+];
 ---
 
-<section id="services" class="py-24 px-6 max-w-7xl mx-auto">
-	<div class="text-center mb-16">
-		<h2 class="text-4xl font-bold text-brand-dark mb-4 font-serif">Garden Design Services</h2>
-		<p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-			We take on garden design commissions for Irish homes — from first sketch to a plan your builder
-			can use. Beautiful in detail, realistic to deliver, and suited to how you actually want to live
-			outdoors.
-		</p>
-		<div class="w-24 h-1 bg-brand mx-auto opacity-50 mt-6"></div>
-	</div>
+<section id="services" class="scroll-reveal py-24 px-6 bg-brand-muted">
+	<div class="max-w-7xl mx-auto">
+		<div class="text-center mb-16">
+			<p class="text-xs font-bold uppercase tracking-[0.2em] text-brand mb-3">What we do</p>
+			<h2 class="text-4xl font-bold text-brand-dark mb-4 font-serif">Garden Design Services</h2>
+			<p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+				We take on garden design commissions for Irish homes — from first sketch to a plan your builder
+				can use. Beautiful in detail, realistic to deliver, and suited to how you actually want to live
+				outdoors.
+			</p>
+			<div class="w-24 h-1 bg-brand mx-auto opacity-50 mt-6"></div>
+		</div>
 
-	<div class="grid md:grid-cols-3 gap-12">
-		{
-			services.map((service) => (
-				<div class="bg-white p-8 border border-brand-border shadow-sm hover:shadow-md transition-shadow">
-					<h3 class="text-xl font-bold text-brand-dark mb-3 font-serif">{service.title}</h3>
-					<p class="text-gray-600 leading-relaxed">{service.description}</p>
-				</div>
-			))
-		}
+		<div class="grid md:grid-cols-3 gap-8">
+			{
+				services.map((service, index) => (
+					<div class="bg-white p-8 border border-brand-border shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+						<div
+							class="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-sm bg-brand-muted text-brand"
+							set:html={icons[index]}
+						/>
+						<h3 class="text-xl font-bold text-brand-dark mb-3 font-serif">{service.title}</h3>
+						<p class="text-gray-600 leading-relaxed">{service.description}</p>
+					</div>
+				))
+			}
+		</div>
 	</div>
 </section>

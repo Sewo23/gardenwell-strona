@@ -15,7 +15,6 @@ export const SITE = {
 	email: 'gardenwell.ie@gmail.com',
 	googleVerification: 'zhOCMrmS0KH4AOR-61y4WFI5DJzgYFlsFLe6bSwEgZw',
 	areasServed: ['Dublin', 'Kildare', 'Meath'],
-	tagline: 'Thoughtful design. Grounded in reality.',
 } as const;
 
 export const services = [

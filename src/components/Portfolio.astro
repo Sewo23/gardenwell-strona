@@ -8,21 +8,22 @@ const projects = [
 		alt: '3D garden visualization of a wooden gazebo, patio, and planting in a landscaped outdoor space',
 		title: '3D Garden Visualisations',
 		caption:
-			'We create detailed 3D renders so you can see how your garden and outdoor relaxation space will look after completion — see and understand before you sit down in your own garden.',
+			'Detailed 3D renders so you can see how your garden and outdoor space will look before anything is built.',
 	},
 	{
-		src: images.garden,
-		alt: 'Classic Irish cottage garden with vibrant perennial borders and stone pathway',
-		title: 'Classic Irish Cottage Garden',
+		src: images.hero,
+		alt: 'Lush garden path with bellflowers and mature trees',
+		title: 'Garden Paths & Planting',
 		caption:
-			'Vibrant, densely planted borders bursting with traditional blooms, perfectly framing classic architecture and thriving in our local climate.',
+			'Layered planting and natural paths that guide you through the garden — structured, but never stiff.',
 	},
 ];
 ---
 
-<section id="portfolio" class="py-24 px-6">
+<section id="portfolio" class="scroll-reveal py-24 px-6 bg-white">
 	<div class="max-w-7xl mx-auto">
 		<div class="text-center mb-16 max-w-2xl mx-auto">
+			<p class="text-xs font-bold uppercase tracking-[0.2em] text-brand mb-3">Our work</p>
 			<h2 class="text-4xl font-bold text-brand-dark mb-4 font-serif">Design Portfolio</h2>
 			<p class="text-gray-600 leading-relaxed">
 				Recent client work and design concepts — gardens meant to be lived in, not just admired on
@@ -30,16 +31,16 @@ const projects = [
 			</p>
 		</div>
 
-		<div class="grid md:grid-cols-2 gap-8">
+		<div class="grid sm:grid-cols-2 gap-8">
 			{
 				projects.map((project) => (
-					<div class="group overflow-hidden rounded-sm relative shadow-sm bg-white">
+					<div class="group overflow-hidden rounded-sm shadow-sm border border-brand-border bg-white">
 						<Image
 							src={project.src}
 							alt={project.alt}
 							widths={[400, 600, 800]}
 							sizes="(max-width: 768px) 100vw, 50vw"
-							class="w-full h-80 object-cover transform group-hover:scale-105 transition-transform duration-700"
+							class="w-full h-72 object-cover transform group-hover:scale-105 transition-transform duration-700"
 							loading="lazy"
 						/>
 						<div class="p-5 border-t border-brand-border">

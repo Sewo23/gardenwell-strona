@@ -1,0 +1,453 @@
+<div class="hero-fx pointer-events-none absolute inset-0 z-[1] overflow-hidden" aria-hidden="true">
+	<div class="hero-fx-glow hero-fx-glow-a"></div>
+	<div class="hero-fx-glow hero-fx-glow-b"></div>
+	<div class="hero-fx-glow hero-fx-glow-c"></div>
+
+	<div class="hero-fx-layer" data-parallax="18">
+		<span class="hero-leaf hero-leaf-1"></span>
+		<span class="hero-leaf hero-leaf-2"></span>
+		<span class="hero-petal hero-petal-1"></span>
+	</div>
+
+	<div class="hero-fx-layer hero-fx-layer-mid" data-parallax="32">
+		<span class="hero-leaf hero-leaf-3"></span>
+		<span class="hero-seed hero-seed-1"></span>
+		<span class="hero-petal hero-petal-2"></span>
+	</div>
+
+	<div class="hero-fx-layer hero-fx-layer-center" data-parallax="26">
+		<span class="hero-leaf hero-leaf-5"></span>
+		<span class="hero-leaf hero-leaf-6"></span>
+		<span class="hero-leaf hero-leaf-7"></span>
+		<span class="hero-petal hero-petal-3"></span>
+		<span class="hero-petal hero-petal-4"></span>
+		<span class="hero-seed hero-seed-3"></span>
+	</div>
+
+	<div class="hero-fx-layer hero-fx-layer-near" data-parallax="48">
+		<span class="hero-leaf hero-leaf-4"></span>
+		<span class="hero-seed hero-seed-2"></span>
+		<span class="hero-ring hero-ring-1"></span>
+	</div>
+
+	<div class="hero-fx-vignette"></div>
+</div>
+
+<style>
+	.hero-fx {
+		perspective: 1200px;
+	}
+
+	.hero-fx-layer {
+		position: absolute;
+		inset: -8%;
+		transform-style: preserve-3d;
+		will-change: transform;
+		transition: transform 0.35s ease-out;
+	}
+
+	.hero-fx-layer-mid {
+		filter: none;
+	}
+
+	.hero-fx-layer-near {
+		filter: blur(0);
+	}
+
+	.hero-fx-glow {
+		position: absolute;
+		border-radius: 50%;
+		filter: blur(40px);
+		opacity: 0.35;
+		animation: heroGlowDrift 18s ease-in-out infinite alternate;
+	}
+
+	.hero-fx-glow-a {
+		top: 10%;
+		left: 8%;
+		width: 28vmin;
+		height: 28vmin;
+		background: radial-gradient(circle, rgba(208, 222, 208, 0.55) 0%, transparent 70%);
+	}
+
+	.hero-fx-glow-b {
+		top: 55%;
+		right: 5%;
+		width: 35vmin;
+		height: 35vmin;
+		background: radial-gradient(circle, rgba(85, 107, 47, 0.45) 0%, transparent 72%);
+		animation-delay: -6s;
+	}
+
+	.hero-fx-glow-c {
+		bottom: 5%;
+		left: 35%;
+		width: 22vmin;
+		height: 22vmin;
+		background: radial-gradient(circle, rgba(255, 245, 210, 0.25) 0%, transparent 70%);
+		animation-delay: -12s;
+	}
+
+	.hero-leaf,
+	.hero-petal,
+	.hero-seed,
+	.hero-ring {
+		position: absolute;
+		display: block;
+		transform-style: preserve-3d;
+	}
+
+	.hero-leaf {
+		background: linear-gradient(
+			145deg,
+			rgba(220, 235, 210, 0.92) 0%,
+			rgba(120, 165, 95, 0.78) 45%,
+			rgba(45, 90, 39, 0.72) 100%
+		);
+		border: 1.5px solid rgba(255, 255, 255, 0.35);
+		box-shadow:
+			0 14px 32px rgba(0, 0, 0, 0.28),
+			0 0 24px rgba(180, 210, 160, 0.2),
+			inset 0 2px 0 rgba(255, 255, 255, 0.35);
+		filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+		opacity: 1;
+	}
+
+	.hero-leaf-1 {
+		top: 12%;
+		left: 6%;
+		width: 5.5rem;
+		height: 8.5rem;
+		border-radius: 0 80% 0 80%;
+		transform: rotate(-35deg) rotateY(25deg);
+		animation: heroFloatA 11s ease-in-out infinite;
+	}
+
+	.hero-leaf-2 {
+		top: 22%;
+		right: 10%;
+		width: 4rem;
+		height: 6rem;
+		border-radius: 80% 0 80% 0;
+		transform: rotate(48deg) rotateY(-18deg);
+		animation: heroFloatB 13s ease-in-out infinite;
+	}
+
+	.hero-leaf-3 {
+		bottom: 18%;
+		left: 14%;
+		width: 6rem;
+		height: 9.5rem;
+		border-radius: 0 85% 0 85%;
+		transform: rotate(12deg) rotateY(32deg);
+		animation: heroFloatC 10s ease-in-out infinite;
+	}
+
+	.hero-leaf-4 {
+		bottom: 28%;
+		right: 8%;
+		width: 7rem;
+		height: 10.5rem;
+		border-radius: 85% 0 85% 0;
+		transform: rotate(-22deg) rotateY(-28deg);
+		animation: heroFloatA 14s ease-in-out infinite reverse;
+	}
+
+	.hero-leaf-5 {
+		top: 34%;
+		left: 24%;
+		width: 3.75rem;
+		height: 5.75rem;
+		border-radius: 0 82% 0 82%;
+		transform: rotate(-18deg) rotateY(20deg);
+		animation: heroFloatB 12s ease-in-out infinite;
+	}
+
+	.hero-leaf-6 {
+		top: 36%;
+		right: 22%;
+		width: 4.25rem;
+		height: 6.5rem;
+		border-radius: 82% 0 82% 0;
+		transform: rotate(32deg) rotateY(-22deg);
+		animation: heroFloatC 11s ease-in-out infinite reverse;
+	}
+
+	.hero-leaf-7 {
+		top: 46%;
+		left: 40%;
+		width: 3rem;
+		height: 4.75rem;
+		border-radius: 0 78% 0 78%;
+		transform: rotate(8deg) rotateY(14deg);
+		animation: heroFloatA 10s ease-in-out infinite;
+		opacity: 0.88;
+	}
+
+	.hero-petal {
+		background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.35), rgba(208, 222, 208, 0.2));
+		border-radius: 50% 50% 50% 0;
+		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+	}
+
+	.hero-petal-1 {
+		top: 38%;
+		left: 18%;
+		width: 2.2rem;
+		height: 2.2rem;
+		transform: rotate(20deg);
+		animation: heroSpinPetal 16s linear infinite;
+		opacity: 0.65;
+	}
+
+	.hero-petal-2 {
+		top: 16%;
+		right: 22%;
+		width: 1.6rem;
+		height: 1.6rem;
+		transform: rotate(-40deg);
+		animation: heroSpinPetal 12s linear infinite reverse;
+	}
+
+	.hero-petal-3 {
+		top: 41%;
+		left: 30%;
+		width: 1.9rem;
+		height: 1.9rem;
+		transform: rotate(55deg);
+		animation: heroSpinPetal 14s linear infinite;
+		opacity: 0.7;
+	}
+
+	.hero-petal-4 {
+		top: 43%;
+		right: 30%;
+		width: 2.1rem;
+		height: 2.1rem;
+		transform: rotate(-25deg);
+		animation: heroSpinPetal 11s linear infinite reverse;
+		opacity: 0.72;
+	}
+
+	.hero-seed {
+		width: 0.55rem;
+		height: 0.55rem;
+		border-radius: 50%;
+		background: rgba(255, 248, 220, 0.75);
+		box-shadow: 0 0 12px rgba(255, 248, 220, 0.45);
+		animation: heroSeedDrift 8s ease-in-out infinite;
+	}
+
+	.hero-seed-1 {
+		top: 30%;
+		right: 28%;
+		animation-delay: -2s;
+	}
+
+	.hero-seed-2 {
+		bottom: 35%;
+		left: 42%;
+		width: 0.7rem;
+		height: 0.7rem;
+		animation-delay: -5s;
+	}
+
+	.hero-seed-3 {
+		top: 48%;
+		left: 54%;
+		width: 0.6rem;
+		height: 0.6rem;
+		animation-delay: -3s;
+	}
+
+	.hero-ring {
+		width: 5rem;
+		height: 5rem;
+		border: 1px solid rgba(208, 222, 208, 0.25);
+		border-radius: 50%;
+		box-shadow:
+			0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+			0 0 40px rgba(208, 222, 208, 0.08);
+		animation: heroRingPulse 9s ease-in-out infinite;
+	}
+
+	.hero-ring-1 {
+		top: 48%;
+		right: 14%;
+	}
+
+	.hero-fx-vignette {
+		position: absolute;
+		inset: 0;
+		background:
+			radial-gradient(ellipse at 50% 45%, transparent 0%, rgba(15, 30, 20, 0.22) 55%, rgba(10, 22, 15, 0.5) 100%),
+			linear-gradient(180deg, rgba(20, 40, 25, 0.15) 0%, rgba(15, 30, 20, 0.32) 100%);
+	}
+
+	@keyframes heroFloatA {
+		0%,
+		100% {
+			transform: translateY(0) rotate(-35deg) rotateY(25deg);
+		}
+		50% {
+			transform: translateY(-14px) rotate(-28deg) rotateY(32deg);
+		}
+	}
+
+	@keyframes heroFloatB {
+		0%,
+		100% {
+			transform: translateY(0) rotate(48deg) rotateY(-18deg);
+		}
+		50% {
+			transform: translateY(10px) rotate(54deg) rotateY(-10deg);
+		}
+	}
+
+	@keyframes heroFloatC {
+		0%,
+		100% {
+			transform: translateY(0) rotate(12deg) rotateY(32deg);
+		}
+		50% {
+			transform: translateY(-12px) rotate(6deg) rotateY(24deg);
+		}
+	}
+
+	@keyframes heroSpinPetal {
+		from {
+			transform: rotate(0deg) translateY(0);
+		}
+		to {
+			transform: rotate(360deg) translateY(-6px);
+		}
+	}
+
+	@keyframes heroSeedDrift {
+		0%,
+		100% {
+			transform: translate(0, 0);
+			opacity: 0.5;
+		}
+		50% {
+			transform: translate(8px, -16px);
+			opacity: 1;
+		}
+	}
+
+	@keyframes heroRingPulse {
+		0%,
+		100% {
+			transform: scale(1) rotate(0deg);
+			opacity: 0.45;
+		}
+		50% {
+			transform: scale(1.08) rotate(8deg);
+			opacity: 0.75;
+		}
+	}
+
+	@keyframes heroGlowDrift {
+		from {
+			transform: translate(0, 0) scale(1);
+		}
+		to {
+			transform: translate(2%, -3%) scale(1.06);
+		}
+	}
+
+	@media (max-width: 767px) {
+		.hero-leaf-1,
+		.hero-leaf-4 {
+			width: 4rem;
+			height: 6.5rem;
+		}
+
+		.hero-leaf-5,
+		.hero-leaf-6 {
+			width: 3rem;
+			height: 4.75rem;
+		}
+
+		.hero-leaf-7 {
+			left: 36%;
+			width: 2.5rem;
+			height: 4rem;
+		}
+
+		.hero-fx-layer-near .hero-leaf-4 {
+			display: block;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.hero-fx-glow,
+		.hero-leaf,
+		.hero-petal,
+		.hero-seed,
+		.hero-ring {
+			animation: none;
+		}
+
+		.hero-fx-layer {
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	function initHeroEffects() {
+		const hero = document.querySelector<HTMLElement>('[data-hero]');
+		if (!hero) return;
+
+		const layers = hero.querySelectorAll<HTMLElement>('[data-parallax]');
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+		if (prefersReducedMotion.matches || layers.length === 0) return;
+
+		let targetX = 0;
+		let targetY = 0;
+		let currentX = 0;
+		let currentY = 0;
+		let rafId = 0;
+
+		const animate = () => {
+			currentX += (targetX - currentX) * 0.06;
+			currentY += (targetY - currentY) * 0.06;
+
+			for (const layer of layers) {
+				const depth = Number(layer.dataset.parallax ?? 24);
+				const tx = currentX * depth;
+				const ty = currentY * depth;
+				layer.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+			}
+
+			rafId = requestAnimationFrame(animate);
+		};
+
+		const onMove = (event: MouseEvent) => {
+			const rect = hero.getBoundingClientRect();
+			const x = (event.clientX - rect.left) / rect.width - 0.5;
+			const y = (event.clientY - rect.top) / rect.height - 0.5;
+			targetX = x;
+			targetY = y;
+		};
+
+		const onLeave = () => {
+			targetX = 0;
+			targetY = 0;
+		};
+
+		hero.addEventListener('mousemove', onMove);
+		hero.addEventListener('mouseleave', onLeave);
+		rafId = requestAnimationFrame(animate);
+
+		document.addEventListener('astro:before-swap', () => {
+			cancelAnimationFrame(rafId);
+			hero.removeEventListener('mousemove', onMove);
+			hero.removeEventListener('mouseleave', onLeave);
+		});
+	}
+
+	initHeroEffects();
+</script>

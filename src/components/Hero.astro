@@ -1,40 +1,73 @@
 ---
 import { Image } from 'astro:assets';
 import { images } from '../data/images';
-import { SITE } from '../data/site';
 import Button from './Button.astro';
+import HeroEffects from './HeroEffects.astro';
 ---
 
-<section class="relative min-h-screen overflow-hidden">
+<section class="relative min-h-screen overflow-hidden" data-hero>
 	<div class="absolute inset-0 z-0">
 		<Image
 			src={images.hero}
-			alt="Garden design concept for an Irish home"
+			alt="Lush garden path with bellflowers and mature trees in Ireland"
 			width={1920}
 			height={1080}
 			widths={[640, 1024, 1536, 1920]}
 			sizes="100vw"
-			class="block h-full w-full object-cover"
+			class="block h-full w-full object-cover scale-105 motion-safe:transition-transform motion-safe:duration-[1200ms]"
 			loading="eager"
 			fetchpriority="high"
+			id="hero-bg-image"
 		/>
-		<div class="absolute inset-0 bg-brand-dark/70" aria-hidden="true"></div>
+		<div class="absolute inset-0 bg-brand-dark/55 pointer-events-none" aria-hidden="true"></div>
 	</div>
 
-	<div class="relative z-10 flex min-h-screen items-center justify-center px-4 py-24 text-center">
+	<HeroEffects />
+
+	<div
+		class="relative z-10 flex min-h-screen items-center justify-center px-4 py-24 text-center pointer-events-none"
+	>
 		<div class="max-w-4xl mx-auto text-white mt-16">
-			<h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-5 leading-tight font-serif animate-fade-in-up">
+			<h1
+				class="text-4xl md:text-6xl lg:text-7xl font-bold mb-10 leading-tight font-serif animate-fade-in-up drop-shadow-[0_4px_24px_rgba(0,0,0,0.35)]"
+			>
 				Garden Design in Ireland
 			</h1>
-			<p class="text-lg md:text-xl font-light max-w-2xl mx-auto text-gray-100 mb-3 animate-fade-in-up-delay-1">
-				Bespoke garden design for homeowners across Dublin, Kildare & Meath.
-			</p>
-			<p class="text-base md:text-lg font-light max-w-lg mx-auto text-brand-light/90 mb-10 animate-fade-in-up-delay-1">
-				{SITE.tagline}
-			</p>
-			<Button href="#services" variant="primary" class="animate-fade-in-up-delay-2">
+			<Button href="#services" variant="primary" class="pointer-events-auto animate-fade-in-up-delay-2">
 				Our Services
 			</Button>
 		</div>
 	</div>
 </section>
+
+<script>
+	function initHeroBgParallax() {
+		const hero = document.querySelector<HTMLElement>('[data-hero]');
+		const bg = document.querySelector<HTMLElement>('#hero-bg-image');
+		if (!hero || !bg) return;
+
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+		if (prefersReducedMotion.matches) return;
+
+		const onMove = (event: MouseEvent) => {
+			const rect = hero.getBoundingClientRect();
+			const x = (event.clientX - rect.left) / rect.width - 0.5;
+			const y = (event.clientY - rect.top) / rect.height - 0.5;
+			bg.style.transform = `scale(1.08) translate(${x * -12}px, ${y * -8}px)`;
+		};
+
+		const onLeave = () => {
+			bg.style.transform = 'scale(1.05) translate(0, 0)';
+		};
+
+		hero.addEventListener('mousemove', onMove);
+		hero.addEventListener('mouseleave', onLeave);
+
+		document.addEventListener('astro:before-swap', () => {
+			hero.removeEventListener('mousemove', onMove);
+			hero.removeEventListener('mouseleave', onLeave);
+		});
+	}
+
+	initHeroBgParallax();
+</script>

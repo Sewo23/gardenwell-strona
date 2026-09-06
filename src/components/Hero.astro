@@ -5,7 +5,7 @@ import Button from './Button.astro';
 import HeroEffects from './HeroEffects.astro';
 ---
 
-<section class="relative min-h-screen overflow-hidden" data-hero>
+<section class="relative h-[50svh] min-h-[22rem] max-h-[36rem] overflow-hidden" data-hero>
 	<div class="absolute inset-0 z-0">
 		<Image
 			src={images.hero}
@@ -14,7 +14,7 @@ import HeroEffects from './HeroEffects.astro';
 			height={1080}
 			widths={[640, 1024, 1536, 1920]}
 			sizes="100vw"
-			class="block h-full w-full object-cover scale-105 motion-safe:transition-transform motion-safe:duration-[1200ms]"
+			class="block h-full w-full object-cover object-[center_40%] scale-105 motion-safe:transition-transform motion-safe:duration-[1200ms]"
 			loading="eager"
 			fetchpriority="high"
 			id="hero-bg-image"
@@ -25,16 +25,16 @@ import HeroEffects from './HeroEffects.astro';
 	<HeroEffects />
 
 	<div
-		class="relative z-10 flex min-h-screen items-center justify-center px-4 py-24 text-center pointer-events-none"
+		class="relative z-10 flex h-full items-start justify-center px-4 pt-24 sm:pt-28 pb-8 text-center pointer-events-none"
 	>
-		<div class="max-w-4xl mx-auto text-white mt-16">
+		<div class="max-w-4xl mx-auto text-white">
 			<h1
-				class="text-4xl md:text-5xl lg:text-6xl font-bold mb-5 leading-tight font-serif animate-fade-in-up drop-shadow-[0_4px_24px_rgba(0,0,0,0.35)]"
+				class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 leading-tight font-serif animate-fade-in-up drop-shadow-[0_4px_24px_rgba(0,0,0,0.35)]"
 			>
 				Your Local Garden Designers in Kildare, Dublin &amp; Beyond
 			</h1>
 			<p
-				class="text-lg md:text-xl font-light max-w-2xl mx-auto text-gray-100 mb-10 animate-fade-in-up-delay-1 drop-shadow-md"
+				class="text-base md:text-lg font-light max-w-2xl mx-auto text-gray-100 mb-6 sm:mb-8 animate-fade-in-up-delay-1 drop-shadow-md"
 			>
 				Creating outdoor spaces you'll love spending time in.
 			</p>

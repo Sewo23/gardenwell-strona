@@ -6,8 +6,8 @@ export const SITE = {
 		'Bespoke garden design for Irish homeowners — buildable plans tailored to your site, budget, and long-term upkeep. Commissioned projects across Dublin, Kildare, and Meath.',
 	ogDescription:
 		'Garden design on commission for Irish homes — thoughtful layouts, Irish-suited planting, and honest planning you can actually build and live with.',
-	phone: '+353838245203',
-	phoneDisplay: '+353 83 824 5203',
+	phone: '+353899621476',
+	phoneDisplay: '089 962 1476',
 	/** WhatsApp inbox only — never shown on the public site */
 	whatsapp: '48660448631',
 	whatsappDefaultMessage:

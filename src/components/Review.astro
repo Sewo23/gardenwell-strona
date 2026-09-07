@@ -1,0 +1,212 @@
+---
+import Button from './Button.astro';
+---
+
+<section id="reviews" class="py-20 md:py-24 px-6 bg-brand-muted">
+	<div class="max-w-3xl mx-auto">
+		<p class="text-xs font-bold uppercase tracking-[0.2em] text-brand mb-3">Client feedback</p>
+		<h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-3 font-serif">Leave a review</h2>
+		<p class="text-brand-text/75 leading-relaxed mb-10 max-w-2xl">
+			Share how your garden project went — a star rating, an optional photo, and a few words about
+			your experience.
+		</p>
+
+		<form
+			name="review"
+			method="POST"
+			enctype="multipart/form-data"
+			data-netlify="true"
+			data-netlify-honeypot="bot-field"
+			netlify-honeypot="bot-field"
+			action="/success/"
+			class="space-y-8"
+			data-review-form
+		>
+			<input type="hidden" name="form-name" value="review" />
+			<input type="hidden" name="rating" value="" data-rating-input required />
+			<p class="hidden" style="display: none;">
+				<label>
+					Don't fill this out if you're human: <input name="bot-field" />
+				</label>
+			</p>
+
+			<div>
+				<label for="review-name" class="block text-sm font-semibold text-brand-dark mb-2">
+					Your name
+				</label>
+				<input
+					type="text"
+					id="review-name"
+					name="name"
+					autocomplete="name"
+					class="w-full border border-brand-border bg-white p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition"
+					required
+				/>
+			</div>
+
+			<fieldset>
+				<legend class="block text-sm font-semibold text-brand-dark mb-3">
+					How would you rate your experience?
+				</legend>
+				<div class="flex items-center gap-1.5 sm:gap-2" data-star-rating role="radiogroup" aria-label="Star rating from 1 to 5">
+					{
+						[1, 2, 3, 4, 5].map((value) => (
+							<button
+								type="button"
+								class="star-btn inline-flex h-11 w-11 items-center justify-center text-brand-border transition-colors hover:text-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-sm"
+								data-star={value}
+								aria-label={`${value} star${value === 1 ? '' : 's'}`}
+								aria-checked="false"
+								role="radio"
+							>
+								<svg class="h-8 w-8" viewBox="0 0 24 24" aria-hidden="true">
+									<path
+										class="star-fill"
+										d="M12 2.5l2.9 6.1 6.6.7-5 4.6 1.4 6.5L12 17.8 6.1 20.4 7.5 13.9l-5-4.6 6.6-.7L12 2.5z"
+										fill="currentColor"
+									/>
+								</svg>
+							</button>
+						))
+					}
+				</div>
+				<p class="mt-2 text-sm text-brand-text/60" data-rating-label>Select 1 to 5 stars</p>
+			</fieldset>
+
+			<div>
+				<label for="review-photo" class="block text-sm font-semibold text-brand-dark mb-2">
+					Add a photo <span class="font-normal text-brand-text/55">(optional)</span>
+				</label>
+				<input
+					type="file"
+					id="review-photo"
+					name="photo"
+					accept="image/jpeg,image/png,image/webp"
+					class="block w-full text-sm text-brand-text file:mr-4 file:rounded-sm file:border-0 file:bg-brand file:px-4 file:py-2.5 file:text-sm file:font-semibold file:uppercase file:tracking-wide file:text-white hover:file:bg-brand-dark file:cursor-pointer cursor-pointer"
+					data-photo-input
+				/>
+				<p class="mt-2 text-sm text-brand-text/60" data-photo-name>JPEG, PNG or WebP — max about 10 MB</p>
+			</div>
+
+			<div>
+				<label for="review-experience" class="block text-sm font-semibold text-brand-dark mb-2">
+					Tell us about your experience
+				</label>
+				<textarea
+					id="review-experience"
+					name="experience"
+					rows="5"
+					placeholder="How did the collaboration go, and what stood out most about the project…"
+					class="w-full border border-brand-border bg-white p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition"
+					required
+				></textarea>
+			</div>
+
+			<div>
+				<label for="review-gdpr-consent" class="flex items-start gap-3 text-sm text-brand-text/80 leading-relaxed cursor-pointer">
+					<input
+						type="checkbox"
+						id="review-gdpr-consent"
+						name="gdpr-consent"
+						value="yes"
+						class="mt-1 shrink-0 rounded-sm border-gray-300 text-brand focus:ring-brand"
+						required
+					/>
+					<span>
+						I consent to Gardenwell storing my review and optional photo for feedback and possible
+						publication. Read our{' '}
+						<a href="/privacy-policy/" class="text-brand underline hover:text-brand-dark">
+							Privacy Policy
+						</a>.
+					</span>
+				</label>
+			</div>
+
+			<Button type="submit" variant="primary" class="w-full sm:w-auto">
+				Submit review
+			</Button>
+		</form>
+	</div>
+</section>
+
+<!-- Hidden form for Netlify build-time detection -->
+<form name="review" data-netlify="true" data-netlify-honeypot="bot-field" netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
+	<input type="text" name="name" />
+	<input type="text" name="rating" />
+	<input type="file" name="photo" />
+	<textarea name="experience"></textarea>
+	<input type="checkbox" name="gdpr-consent" value="yes" />
+	<input type="text" name="bot-field" />
+</form>
+
+<style>
+	.star-btn[aria-checked='true'],
+	.star-btn.is-active {
+		color: var(--color-brand);
+	}
+
+	.star-btn[aria-checked='false']:not(.is-active) {
+		color: #d5ddd4;
+	}
+</style>
+
+<script>
+	function initReviewForm() {
+		const form = document.querySelector<HTMLFormElement>('[data-review-form]');
+		const ratingInput = form?.querySelector<HTMLInputElement>('[data-rating-input]');
+		const ratingLabel = form?.querySelector<HTMLElement>('[data-rating-label]');
+		const starRoot = form?.querySelector<HTMLElement>('[data-star-rating]');
+		const stars = form?.querySelectorAll<HTMLButtonElement>('[data-star]');
+		const photoInput = form?.querySelector<HTMLInputElement>('[data-photo-input]');
+		const photoName = form?.querySelector<HTMLElement>('[data-photo-name]');
+		if (!form || !ratingInput || !starRoot || !stars?.length) return;
+
+		let current = 0;
+
+		const paint = (value: number, hover = false) => {
+			stars.forEach((star) => {
+				const n = Number(star.dataset.star);
+				const on = n <= value;
+				star.classList.toggle('is-active', on);
+				if (!hover) star.setAttribute('aria-checked', n === value ? 'true' : 'false');
+			});
+		};
+
+		const setRating = (value: number) => {
+			current = value;
+			ratingInput.value = String(value);
+			paint(value);
+			if (ratingLabel) ratingLabel.textContent = `${value} of 5 stars`;
+		};
+
+		stars.forEach((star) => {
+			const value = Number(star.dataset.star);
+			star.addEventListener('click', () => setRating(value));
+			star.addEventListener('mouseenter', () => paint(value, true));
+			star.addEventListener('focus', () => paint(value, true));
+		});
+
+		starRoot.addEventListener('mouseleave', () => paint(current));
+		starRoot.addEventListener('focusout', () => paint(current));
+
+		photoInput?.addEventListener('change', () => {
+			const file = photoInput.files?.[0];
+			if (photoName) {
+				photoName.textContent = file
+					? file.name
+					: 'JPEG, PNG or WebP — max about 10 MB';
+			}
+		});
+
+		form.addEventListener('submit', (event) => {
+			if (!ratingInput.value) {
+				event.preventDefault();
+				ratingLabel?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+				if (ratingLabel) ratingLabel.textContent = 'Please choose a star rating';
+				stars[0]?.focus();
+			}
+		});
+	}
+
+	initReviewForm();
+</script>

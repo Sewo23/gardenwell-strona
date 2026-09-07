@@ -19,7 +19,7 @@ const slides = [...recentWork, ...recentWork];
 			role="region"
 			aria-label="Latest project photos"
 		>
-			<div class="carousel-rail flex gap-4 md:gap-5 w-max will-change-transform" data-carousel-rail>
+			<div class="carousel-rail flex gap-4 md:gap-5 w-max" data-carousel-rail>
 				{
 					slides.map((slide, index) => (
 						<div class="carousel-slide shrink-0 w-[72vw] sm:w-[280px] md:w-[340px]">
@@ -29,7 +29,7 @@ const slides = [...recentWork, ...recentWork];
 								data-open-photo
 								data-src={slide.src}
 								data-alt={slide.alt}
-								aria-label={`Enlarge photo ${index + 1}`}
+								aria-label={`Enlarge photo ${(index % recentWork.length) + 1}`}
 							>
 								<img
 									src={slide.src}
@@ -37,8 +37,9 @@ const slides = [...recentWork, ...recentWork];
 									width="680"
 									height="510"
 									class="h-full w-full object-cover pointer-events-none"
-									loading={index < 4 ? 'eager' : 'lazy'}
+									loading={index < recentWork.length ? 'eager' : 'lazy'}
 									decoding="async"
+									draggable="false"
 								/>
 							</button>
 						</div>
@@ -72,26 +73,10 @@ const slides = [...recentWork, ...recentWork];
 </section>
 
 <style>
-	.carousel-viewport {
-		mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
-	}
-
 	.carousel-rail {
-		animation: workDrift 55s linear infinite;
-	}
-
-	.carousel-viewport.is-paused .carousel-rail,
-	[data-work-carousel].is-lightbox-open .carousel-rail {
-		animation-play-state: paused;
-	}
-
-	@keyframes workDrift {
-		from {
-			transform: translate3d(0, 0, 0);
-		}
-		to {
-			transform: translate3d(-50%, 0, 0);
-		}
+		transform: translate3d(0, 0, 0);
+		will-change: transform;
+		backface-visibility: hidden;
 	}
 
 	.carousel-fade {
@@ -115,11 +100,15 @@ const slides = [...recentWork, ...recentWork];
 
 	.photo-thumb {
 		cursor: zoom-in;
+	}
+
+	.photo-thumb img {
+		transform: scale(1);
 		transition: transform 0.35s ease;
 	}
 
-	.photo-thumb:hover {
-		transform: scale(1.02);
+	.photo-thumb:hover img {
+		transform: scale(1.03);
 	}
 
 	.photo-lightbox[open] {
@@ -141,12 +130,12 @@ const slides = [...recentWork, ...recentWork];
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.carousel-rail {
-			animation: none;
+		.photo-thumb img {
+			transition: none;
 		}
 
-		.photo-thumb {
-			transition: none;
+		.photo-thumb:hover img {
+			transform: none;
 		}
 	}
 </style>
@@ -155,28 +144,67 @@ const slides = [...recentWork, ...recentWork];
 	function initWorkCarousel() {
 		const root = document.querySelector<HTMLElement>('[data-work-carousel]');
 		const viewport = root?.querySelector<HTMLElement>('[data-carousel-viewport]');
+		const rail = root?.querySelector<HTMLElement>('[data-carousel-rail]');
 		const lightbox = root?.querySelector<HTMLDialogElement>('[data-photo-lightbox]');
 		const lightboxImg = root?.querySelector<HTMLImageElement>('[data-lightbox-img]');
 		const closeBtn = root?.querySelector<HTMLButtonElement>('[data-close-photo]');
-		if (!root || !viewport || !lightbox || !lightboxImg) return;
+		if (!root || !viewport || !rail || !lightbox || !lightboxImg) return;
 
 		const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-		if (reduce) viewport.classList.add('is-paused');
+		const speedPxPerSec = 36;
+		let offset = 0;
+		let loopWidth = 0;
+		let paused = reduce;
+		let rafId = 0;
+		let lastTs = 0;
+
+		const measure = () => {
+			loopWidth = rail.scrollWidth / 2;
+			if (loopWidth > 0 && offset >= loopWidth) offset = offset % loopWidth;
+		};
+
+		const render = () => {
+			rail.style.transform = `translate3d(${-offset}px, 0, 0)`;
+		};
+
+		const tick = (ts: number) => {
+			if (!lastTs) lastTs = ts;
+			const dt = Math.min((ts - lastTs) / 1000, 0.05);
+			lastTs = ts;
+
+			if (!paused && loopWidth > 0) {
+				offset += speedPxPerSec * dt;
+				if (offset >= loopWidth) offset -= loopWidth;
+				render();
+			}
+
+			rafId = requestAnimationFrame(tick);
+		};
+
+		const setPaused = (value: boolean) => {
+			paused = reduce || value;
+			if (!paused) lastTs = 0;
+		};
+
+		measure();
+		render();
+		if (!reduce) rafId = requestAnimationFrame(tick);
+
+		const onResize = () => measure();
+		window.addEventListener('resize', onResize, { passive: true });
 
 		viewport.addEventListener('pointerenter', () => {
-			if (!root.classList.contains('is-lightbox-open')) viewport.classList.add('is-paused');
+			if (!root.classList.contains('is-lightbox-open')) setPaused(true);
 		});
 		viewport.addEventListener('pointerleave', () => {
-			if (!root.classList.contains('is-lightbox-open') && !reduce) {
-				viewport.classList.remove('is-paused');
-			}
+			if (!root.classList.contains('is-lightbox-open')) setPaused(false);
 		});
 
 		const openPhoto = (src: string, alt: string) => {
 			lightboxImg.src = src;
 			lightboxImg.alt = alt;
 			root.classList.add('is-lightbox-open');
-			viewport.classList.add('is-paused');
+			setPaused(true);
 			lightbox.showModal();
 		};
 
@@ -185,7 +213,7 @@ const slides = [...recentWork, ...recentWork];
 			lightboxImg.removeAttribute('src');
 			lightboxImg.alt = '';
 			root.classList.remove('is-lightbox-open');
-			if (!reduce) viewport.classList.remove('is-paused');
+			setPaused(false);
 		};
 
 		root.querySelectorAll<HTMLButtonElement>('[data-open-photo]').forEach((btn) => {
@@ -209,6 +237,11 @@ const slides = [...recentWork, ...recentWork];
 		lightbox.addEventListener('cancel', (e) => {
 			e.preventDefault();
 			closePhoto();
+		});
+
+		document.addEventListener('astro:before-swap', () => {
+			cancelAnimationFrame(rafId);
+			window.removeEventListener('resize', onResize);
 		});
 	}
 

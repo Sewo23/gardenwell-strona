@@ -21,9 +21,10 @@ import Button from './Button.astro';
 			action="/success/"
 			class="space-y-8"
 			data-review-form
+			lang="en"
 		>
 			<input type="hidden" name="form-name" value="review" />
-			<input type="hidden" name="rating" value="" data-rating-input required />
+			<input type="hidden" name="rating" value="" data-rating-input />
 			<p class="hidden" style="display: none;">
 				<label>
 					Don't fill this out if you're human: <input name="bot-field" />
@@ -41,6 +42,7 @@ import Button from './Button.astro';
 					autocomplete="name"
 					class="w-full border border-brand-border bg-white p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition"
 					required
+					data-required-message="Please enter your name."
 				/>
 			</div>
 
@@ -74,18 +76,27 @@ import Button from './Button.astro';
 			</fieldset>
 
 			<div>
-				<label for="review-photo" class="block text-sm font-semibold text-brand-dark mb-2">
+				<p class="block text-sm font-semibold text-brand-dark mb-2">
 					Add a photo <span class="font-normal text-brand-text/55">(optional)</span>
+				</p>
+				<label
+					for="review-photo"
+					class="inline-flex flex-wrap items-center gap-3 cursor-pointer"
+				>
+					<span class="inline-flex items-center rounded-sm bg-brand px-4 py-2.5 text-sm font-semibold uppercase tracking-wide text-white hover:bg-brand-dark transition-colors">
+						Choose file
+					</span>
+					<span class="text-sm text-brand-text/70" data-photo-name>No file chosen</span>
 				</label>
 				<input
 					type="file"
 					id="review-photo"
 					name="photo"
 					accept="image/jpeg,image/png,image/webp"
-					class="block w-full text-sm text-brand-text file:mr-4 file:rounded-sm file:border-0 file:bg-brand file:px-4 file:py-2.5 file:text-sm file:font-semibold file:uppercase file:tracking-wide file:text-white hover:file:bg-brand-dark file:cursor-pointer cursor-pointer"
+					class="sr-only"
 					data-photo-input
 				/>
-				<p class="mt-2 text-sm text-brand-text/60" data-photo-name>JPEG, PNG or WebP — max about 10 MB</p>
+				<p class="mt-2 text-sm text-brand-text/60">JPEG, PNG or WebP — max about 10 MB</p>
 			</div>
 
 			<div>
@@ -99,6 +110,7 @@ import Button from './Button.astro';
 					placeholder="How did the collaboration go, and what stood out most about the project…"
 					class="w-full border border-brand-border bg-white p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition"
 					required
+					data-required-message="Please tell us about your experience."
 				></textarea>
 			</div>
 
@@ -111,6 +123,7 @@ import Button from './Button.astro';
 						value="yes"
 						class="mt-1 shrink-0 rounded-sm border-gray-300 text-brand focus:ring-brand"
 						required
+						data-required-message="Please tick this box to continue."
 					/>
 					<span>
 						I consent to Gardenwell storing my review and optional photo for feedback and possible
@@ -148,9 +161,46 @@ import Button from './Button.astro';
 	.star-btn[aria-checked='false']:not(.is-active) {
 		color: #d5ddd4;
 	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
 </style>
 
 <script>
+	function applyEnglishValidation(form: HTMLFormElement) {
+		const fields = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(
+			'input, textarea, select',
+		);
+
+		fields.forEach((field) => {
+			const clear = () => field.setCustomValidity('');
+			field.addEventListener('input', clear);
+			field.addEventListener('change', clear);
+
+			field.addEventListener('invalid', () => {
+				const custom = field.dataset.requiredMessage;
+				if (field.validity.valueMissing) {
+					field.setCustomValidity(custom || 'Please fill in this field.');
+					return;
+				}
+				if (field.validity.typeMismatch && field instanceof HTMLInputElement && field.type === 'email') {
+					field.setCustomValidity('Please enter a valid email address.');
+					return;
+				}
+				field.setCustomValidity('Please check this field.');
+			});
+		});
+	}
+
 	function initReviewForm() {
 		const form = document.querySelector<HTMLFormElement>('[data-review-form]');
 		const ratingInput = form?.querySelector<HTMLInputElement>('[data-rating-input]');
@@ -160,6 +210,8 @@ import Button from './Button.astro';
 		const photoInput = form?.querySelector<HTMLInputElement>('[data-photo-input]');
 		const photoName = form?.querySelector<HTMLElement>('[data-photo-name]');
 		if (!form || !ratingInput || !starRoot || !stars?.length) return;
+
+		applyEnglishValidation(form);
 
 		let current = 0;
 
@@ -176,7 +228,11 @@ import Button from './Button.astro';
 			current = value;
 			ratingInput.value = String(value);
 			paint(value);
-			if (ratingLabel) ratingLabel.textContent = `${value} of 5 stars`;
+			if (ratingLabel) {
+				ratingLabel.textContent = `${value} of 5 stars`;
+				ratingLabel.classList.remove('text-red-700');
+				ratingLabel.classList.add('text-brand-text/60');
+			}
 		};
 
 		stars.forEach((star) => {
@@ -191,18 +247,18 @@ import Button from './Button.astro';
 
 		photoInput?.addEventListener('change', () => {
 			const file = photoInput.files?.[0];
-			if (photoName) {
-				photoName.textContent = file
-					? file.name
-					: 'JPEG, PNG or WebP — max about 10 MB';
-			}
+			if (photoName) photoName.textContent = file ? file.name : 'No file chosen';
 		});
 
 		form.addEventListener('submit', (event) => {
 			if (!ratingInput.value) {
 				event.preventDefault();
 				ratingLabel?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-				if (ratingLabel) ratingLabel.textContent = 'Please choose a star rating';
+				if (ratingLabel) {
+					ratingLabel.textContent = 'Please choose a star rating.';
+					ratingLabel.classList.remove('text-brand-text/60');
+					ratingLabel.classList.add('text-red-700');
+				}
 				stars[0]?.focus();
 			}
 		});

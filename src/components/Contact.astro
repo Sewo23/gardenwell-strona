@@ -72,6 +72,8 @@ const whatsappUrl = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(SI
 			netlify-honeypot="bot-field"
 			action="/success/"
 			class="space-y-4"
+			lang="en"
+			data-contact-form
 		>
 			<input type="hidden" name="form-name" value="contact" />
 			<p class="hidden" style="display: none;">
@@ -89,6 +91,7 @@ const whatsappUrl = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(SI
 					name="name"
 					class="w-full border border-gray-300 p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition"
 					required
+					data-required-message="Please enter your name."
 				/>
 			</div>
 			<div>
@@ -101,6 +104,7 @@ const whatsappUrl = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(SI
 					name="email"
 					class="w-full border border-gray-300 p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition"
 					required
+					data-required-message="Please enter your email address."
 				/>
 			</div>
 			<div>
@@ -114,6 +118,7 @@ const whatsappUrl = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(SI
 					placeholder="Tell us about your garden, budget, and how much upkeep you'd like..."
 					class="w-full border border-gray-300 p-3 rounded-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition"
 					required
+					data-required-message="Please enter your message."
 				></textarea>
 			</div>
 			<div>
@@ -125,6 +130,7 @@ const whatsappUrl = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(SI
 						value="yes"
 						class="mt-1 shrink-0 rounded-sm border-gray-300 text-brand focus:ring-brand"
 						required
+						data-required-message="Please tick this box to continue."
 					/>
 					<span>
 						I consent to having Gardenwell collect my personal details to respond to my inquiry.
@@ -151,3 +157,32 @@ const whatsappUrl = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(SI
 	<input type="checkbox" name="gdpr-consent" value="yes" />
 	<input type="text" name="bot-field" />
 </form>
+
+<script>
+	function initContactFormValidation() {
+		const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+		if (!form) return;
+
+		const fields = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea');
+		fields.forEach((field) => {
+			const clear = () => field.setCustomValidity('');
+			field.addEventListener('input', clear);
+			field.addEventListener('change', clear);
+
+			field.addEventListener('invalid', () => {
+				const custom = field.dataset.requiredMessage;
+				if (field.validity.valueMissing) {
+					field.setCustomValidity(custom || 'Please fill in this field.');
+					return;
+				}
+				if (field.validity.typeMismatch && field instanceof HTMLInputElement && field.type === 'email') {
+					field.setCustomValidity('Please enter a valid email address.');
+					return;
+				}
+				field.setCustomValidity('Please check this field.');
+			});
+		});
+	}
+
+	initContactFormValidation();
+</script>
